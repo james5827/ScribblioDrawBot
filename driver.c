@@ -1,25 +1,5 @@
 #include "driver.h"
 
-struct coords{
-	unsigned int x;
-	unsigned int y;
-};
-
-struct color {
-	unsigned int total;
-	struct coords pos;
-};
-
-struct draw {
-	struct coords start;
-	struct coords end;
-
-	struct coords pos;
-
-	struct color colors[TOT_COLORS];
-	unsigned int current_color;
-};
-
 static struct draw drawer = {
 	.start = {
 		.x = 223,
@@ -36,156 +16,244 @@ static struct draw drawer = {
 		.y = 442,
 	},
 
-	.colors = {
+	.palette = {
 		{ // white
-			.total = 765,
+			.color = {
+				.red = 255,
+				.green = 255,
+				.blue = 255,
+			},
 			.pos = {
 				.x = 300,
 				.y = 1035,
 			},
 		},
 		{ // light grey
-			.total = 580,
+			.color = {
+				.red = 193,
+				.green = 193,
+				.blue = 193,
+			},
 			.pos = {
 				.x = 324,
 				.y = 1035,
 			},
 		},
 		{ // light red
-			.total = 267,
+			.color = {
+				.red = 239,
+				.green = 19,
+				.blue = 11,
+			},
 			.pos = {
 				.x = 348,
 				.y = 1035,
 			},
 		},
 		{ // light orange
-			.total = 367,
+			.color = {
+				.red = 255,
+				.green = 113,
+				.blue = 0,
+			},
 			.pos = {
 				.x = 372,
 				.y = 1035,
 			},
 		},
 		{ // light yellow
-			.total = 479,
+			.color = {
+				.red = 255,
+				.green = 228,
+				.blue = 0,
+			},
 			.pos = {
 				.x = 396,
 				.y = 1035,
 			},
 		},
 		{ // light green
-			.total = 203,
+			.color = {
+				.red = 0,
+				.green = 204,
+				.blue = 0,
+			},
 			.pos = {
 				.x = 420,
 				.y = 1035,
 			},
 		},
 		{ // light blue
-			.total = 430,
+			.color = {
+				.red = 0,
+				.green = 178,
+				.blue = 255,
+			},
 			.pos = {
 				.x = 444,
 				.y = 1035,
 			},
 		},
 		{ // light navy blue
-			.total = 272,
+			.color = {
+				.red = 35,
+				.green = 31,
+				.blue = 211,
+			},
 			.pos = {
 				.x = 468,
 				.y = 1035,
 			},
 		},
 		{ // light purple
-			.total = 344,
+			.color = {
+				.red = 163,
+				.green = 0,
+				.blue = 186,
+			},
 			.pos = {
 				.x = 492,
 				.y = 1035,
 			},
 		},
 		{ // light pink
-			.total = 498,
+			.color = {
+				.red = 211,
+				.green = 124,
+				.blue = 170,
+			},
 			.pos = {
 				.x = 516,
 				.y = 1035,
 			},
 		},
 		{ // light brown
-			.total = 285,
+			.color = {
+				.red = 160,
+				.green = 82,
+				.blue = 45,
+			},
 			.pos = {
 				.x = 540,
 				.y = 1035,
 			},
 		},
 		{ // black
-			.total = 0,
+			.color = {
+				.red = 0,
+				.green = 0,
+				.blue = 0,
+			},
 			.pos = {
 				.x = 300,
 				.y = 1059,
 			},
 		},
 		{ // dark grey
-			.total = 226,
+			.color = {
+				.red = 76,
+				.green = 76,
+				.blue = 76,
+			},
 			.pos = {
 				.x = 324,
 				.y = 1059,
 			},
 		},
 		{ // dark red
-			.total = 130,
+			.color = {
+				.red = 116,
+				.green = 11,
+				.blue = 7,
+			},
 			.pos = {
 				.x = 348,
 				.y = 1059,
 			},
 		},
 		{ // dark orange
-			.total = 245,
+			.color = {
+				.red = 194,
+				.green = 56,
+				.blue = 0,
+			},
 			.pos = {
 				.x = 372,
 				.y = 1059,
 			},
 		},
 		{ // dark yellow
-			.total = 392,
+			.color = {
+				.red = 232,
+				.green = 162,
+				.blue = 0,
+			},
 			.pos = {
 				.x = 396,
 				.y = 1059,
 			},
 		},
 		{ // dark green
-			.total = 99,
+			.color = {
+				.red = 0,
+				.green = 85,
+				.blue = 16,
+			},
 			.pos = {
 				.x = 420,
 				.y = 1059,
 			},
 		},
 		{ // dark blue
-			.total = 237,
+			.color = {
+				.red = 0,
+				.green = 86,
+				.blue = 158,
+			},
 			.pos = {
 				.x = 444,
 				.y = 1059,
 			},
 		},
 		{ // dark navy blue
-			.total = 121,
+			.color = {
+				.red = 14,
+				.green = 8,
+				.blue = 101,
+			},
 			.pos = {
 				.x = 468,
 				.y = 1059,
 			},
 		},
 		{ // dark purple
-			.total = 191,
+			.color = {
+				.red = 85,
+				.green = 0,
+				.blue = 105,
+			},
 			.pos = {
 				.x = 492,
 				.y = 1059,
 			},
 		},
 		{ // dark pink
-			.total = 364,
+			.color = {
+				.red = 167,
+				.green = 85,
+				.blue = 116,
+			},
 			.pos = {
 				.x = 516,
 				.y = 1059,
 			},
 		},
 		{ // dark brown
-			.total = 158,
+			.color = {
+				.red = 99,
+				.green = 48,
+				.blue = 13,
+			},
 			.pos = {
 				.x = 540,
 				.y = 1059,
@@ -200,29 +268,26 @@ int main(void)
 	init_mousehook();
 	read_png_file("chair.png");
 
-	int png_col; int pix_x = 0;
+	struct color png_col; 
+	int pix_x = 0;
 	int pix_y = 0;
-	int clicked = 0;
-	while (drawer.pos.y < drawer.end.y) {
 
+	bool clicked = false;
+	while (drawer.pos.y < drawer.end.y) {
 		while (drawer.pos.x < drawer.end.x) {
 
-			png_col = process_png_file(pix_x, pix_y);
+			if (process_png_file(pix_x, pix_y, &png_col)) {
 
-			if (png_col != -1) {
-				png_col /= 9;
+				int closest_color = find_closest_color(png_col);
 
-				png_col = cmp_colors(png_col);
-
-				if (drawer.current_color != png_col) {
-					drawer.current_color = png_col;
-
+				if (drawer.current_color != closest_color) {
+					drawer.current_color = closest_color; 
 					if (clicked) {
 						release();
 						clicked = 0;
 					}
 
-					move_mouse(drawer.colors[drawer.current_color].pos.x, drawer.colors[drawer.current_color].pos.y);
+					move_mouse(drawer.palette[drawer.current_color].pos.x, drawer.palette[drawer.current_color].pos.y);
 					click();
 					release();
 
@@ -242,8 +307,8 @@ int main(void)
 			}
 			
 
-			pix_x += 3;
-			drawer.pos.x += 3;
+			pix_x += 2;
+			drawer.pos.x += 2;
 		}
 
 		if (clicked) {
@@ -262,14 +327,27 @@ int main(void)
 	return 0;
 }
 
-int cmp_colors(int color)
+int find_closest_color(struct color png_col)
 {
 	int ret = 0;
-	int min_diff = abs(color - drawer.colors[0].total);
-	int tmp_diff;
 
+	double min_diff= sqrt((double)
+				(
+						(((png_col.red - drawer.palette[0].color.red) * (png_col.red - drawer.palette[0].color.red)) * 2) +
+						(((png_col.green - drawer.palette[0].color.green) * (png_col.green - drawer.palette[0].color.green)) * 4) +
+						(((png_col.blue - drawer.palette[0].color.blue) * (png_col.blue - drawer.palette[0].color.blue)) * 3)
+				)
+			);
+	double tmp_diff;
 	for (int i = 1; i < TOT_COLORS; i++) {
-		tmp_diff = abs(color - drawer.colors[i].total);
+		tmp_diff = sqrt((double)
+					(
+						(((png_col.red - drawer.palette[i].color.red) * (png_col.red - drawer.palette[i].color.red)) * 2) +
+						(((png_col.green - drawer.palette[i].color.green) * (png_col.green - drawer.palette[i].color.green)) * 4) +
+						(((png_col.blue - drawer.palette[i].color.blue) * (png_col.blue - drawer.palette[i].color.blue)) * 3)
+					)
+				);
+
 		if (tmp_diff < min_diff) {
 			min_diff = tmp_diff;
 			ret = i;

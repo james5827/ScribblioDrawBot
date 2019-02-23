@@ -60,12 +60,14 @@ void read_png_file(char *filename)
 	fclose(fp);
 }
 
-int process_png_file(int x, int y)
+bool process_png_file(int x, int y, struct color *png_col)
 {
 	int hy = y + 2;
-	int hx = x + 3;
+	int hx = x + 2;
 
-	int total = 0;
+	png_col->red = 0;
+	png_col->green = 0;
+	png_col->blue = 0;
 
 	while (y < hy) {
 		png_bytep row = row_pointers[y];
@@ -74,11 +76,11 @@ int process_png_file(int x, int y)
 			png_bytep px = &(row[x * 4]);
 
 			if (px[3]) {
-				total += px[0];
-				total += px[1];
-				total += px[2];
+				png_col->red += px[0];
+				png_col->green += px[1];
+				png_col->blue += px[2];
 			} else {
-				return -1;
+				return false;
 			}
 
 			x++;
@@ -86,7 +88,11 @@ int process_png_file(int x, int y)
 		y++;
 	}
 
-	return total;
+	png_col->red /= 4;
+	png_col->green /= 4;
+	png_col->blue /= 4;
+
+	return true;
 }
 
 void free_png(void)

@@ -46,7 +46,7 @@ void move_mouse(int x, int y)
 {
     	XWarpPointer(dpy, None, root, 0, 0, 0, 0, x, y);
 	XFlush(dpy);
-	usleep(100);
+	usleep(200);
 }
 
 void click() 
@@ -72,7 +72,7 @@ void click()
 	    fprintf(stderr, "Error to send the event!\n");
 
 	  XFlush(dpy);
-	  usleep(3000);
+	  usleep(100);
 }
 
 void release()
